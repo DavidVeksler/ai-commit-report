@@ -1,0 +1,692 @@
+<title>__GOAL__ Commits</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;900&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one long git log. Each section is a "commit": a mono eyebrow with the real git command that computes its chart, a scoreboard headline, then the chart. */
+:root {
+  --bg: #f1f3f8;
+  --surface: #ffffff;
+  --ink: #0f1830;
+  --muted: #586379;
+  --rule: #d8dde8;
+  --accent: #2b45e0;
+  --night: #c97a0e;
+  --c-claude: #2b45e0;
+  --c-untagged: #8b95a8;
+  --c-auto: #d98a1c;
+  --c-codex: #0f9d8a;
+  --c-copilot: #8a4fd6;
+  --h0: #e2e6ef; --h1: #c4ccf6; --h2: #8f9ff0; --h3: #5b71e8; --h4: #2b45e0; --h5: #13208a;
+  --f-display: "Big Shoulders Display", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --f-body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0a0f1e; --surface: #111832; --ink: #e8ecf7; --muted: #98a2bc; --rule: #232c4f;
+    --accent: #7d8cff; --night: #f2b04a;
+    --c-claude: #7d8cff; --c-untagged: #69738e; --c-auto: #f2b04a; --c-codex: #34c7b0; --c-copilot: #b28af5;
+    --h0: #19203d; --h1: #25316b; --h2: #33479c; --h3: #4c64d4; --h4: #7d8cff; --h5: #cad0ff;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0a0f1e; --surface: #111832; --ink: #e8ecf7; --muted: #98a2bc; --rule: #232c4f;
+  --accent: #7d8cff; --night: #f2b04a;
+  --c-claude: #7d8cff; --c-untagged: #69738e; --c-auto: #f2b04a; --c-codex: #34c7b0; --c-copilot: #b28af5;
+  --h0: #19203d; --h1: #25316b; --h2: #33479c; --h3: #4c64d4; --h4: #7d8cff; --h5: #cad0ff;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font: 16px/1.55 var(--f-body);
+  -webkit-font-smoothing: antialiased;
+}
+.wrap {
+  max-width: 1080px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+section { padding-block: 56px; border-top: 1px solid var(--rule); }
+section:first-of-type { border-top: 0; }
+.cmd {
+  font: 400 12.5px/1.4 var(--f-mono); color: var(--muted);
+  display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.cmd b { color: var(--accent); font-weight: 600; }
+.cmd code { overflow-wrap: anywhere; }
+h1, h2 {
+  font-family: var(--f-display); font-weight: 900; text-transform: uppercase;
+  letter-spacing: .01em; line-height: .92; margin: 0; text-wrap: balance;
+}
+h2 { font-size: clamp(34px, 6vw, 60px); max-width: 18ch; }
+h2 em { font-style: normal; color: var(--accent); }
+.lede { color: var(--muted); max-width: 62ch; margin: 14px 0 0; font-size: 17px; }
+.lede strong { color: var(--ink); font-weight: 600; }
+.num { font-variant-numeric: tabular-nums; }
+.mono { font-family: var(--f-mono); }
+
+/* Hero */
+.hero { padding-block: 48px 40px; }
+.hero .who { font: 600 13px/1.4 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); display: flex; gap: 6px 18px; flex-wrap: wrap; }
+.hero .who a { color: inherit; }
+.big {
+  font-family: var(--f-display); font-weight: 900; line-height: .8;
+  font-size: clamp(110px, 24vw, 260px); letter-spacing: -.01em; margin: 18px 0 0;
+  font-variant-numeric: tabular-nums;
+}
+.big small { display: block; font-size: .22em; font-weight: 700; letter-spacing: .02em; line-height: 1; margin-top: .62em; text-transform: uppercase; color: var(--muted); }
+.hero h1 { font-size: clamp(30px, 5vw, 50px); margin-top: 26px; max-width: 22ch; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+
+.rail { margin-top: 30px; }
+.rail svg { width: 100%; height: auto; display: block; overflow: visible; }
+.rail text { font: 500 12px var(--f-mono); fill: var(--muted); }
+.rail .lbl-strong { fill: var(--ink); font-weight: 600; }
+
+
+/* Charts */
+.chart { margin-top: 28px; }
+.chart svg { width: 100%; height: auto; display: block; }
+.chart text { font-family: var(--f-mono); fill: var(--muted); }
+.scroll-x { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 14px; font: 12.5px var(--f-mono); color: var(--muted); }
+.legend i { display: inline-block; width: 11px; height: 11px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+
+.split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: center; }
+@media (max-width: 760px) { .split { grid-template-columns: minmax(0, 1fr); gap: 24px; } }
+
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 26px 32px; margin-top: 32px; }
+.fact b { display: block; font: 800 clamp(40px, 6vw, 56px)/.9 var(--f-display); font-variant-numeric: tabular-nums; }
+.fact span { display: block; color: var(--muted); font-size: 14px; margin-top: 8px; max-width: 26ch; }
+.fact.hl b { color: var(--accent); }
+.fact.night b { color: var(--night); }
+
+/* Co-author bar */
+.stackbar { display: flex; height: 64px; border-radius: 6px; overflow: hidden; margin-top: 28px; }
+.stackbar div { min-width: 3px; }
+.cat-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 18px 28px; margin-top: 22px; }
+.cat-list div { font-size: 14px; color: var(--muted); }
+.cat-list b { display: block; font: 800 34px/1 var(--f-display); color: var(--ink); font-variant-numeric: tabular-nums; margin-bottom: 4px; }
+.cat-list i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; }
+
+/* Tier table */
+.tiers { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin-top: 28px; border-top: 1px solid var(--rule); }
+.tiers div { padding: 14px 12px 0 0; }
+.tiers b { display: block; font: 800 32px/1 var(--f-display); font-variant-numeric: tabular-nums; }
+.tiers span { display: block; font: 600 12px var(--f-mono); text-transform: uppercase; letter-spacing: .06em; margin-top: 6px; }
+.tiers p { margin: 4px 0 0; font-size: 13.5px; color: var(--muted); }
+@media (max-width: 640px) { .tiers { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 14px; } }
+
+/* Playbook */
+.rules { list-style: none; padding: 0; margin: 30px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 30px 40px; counter-reset: r; }
+.rules li { counter-increment: r; }
+.rules h3 { font: 700 22px/1.15 var(--f-display); text-transform: uppercase; letter-spacing: .02em; margin: 0 0 6px; display: flex; gap: 10px; align-items: baseline; }
+.rules h3::before { content: counter(r, decimal-leading-zero); font: 600 12px var(--f-mono); color: var(--accent); }
+.rules p { margin: 0; color: var(--muted); font-size: 15px; }
+
+.cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.btn {
+  font: 600 14px var(--f-body); text-decoration: none; padding: 12px 18px; border-radius: 6px;
+  border: 1px solid var(--ink); color: var(--ink); background: transparent;
+}
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.btn:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+footer { padding-block: 36px 60px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 13.5px; }
+footer p { max-width: 80ch; margin: 0 0 10px; }
+footer a { color: inherit; }
+section.links { border-top: 0; padding-top: 0; }
+section.links .cta { margin-top: 0; }
+
+#tip {
+  position: fixed; pointer-events: none; z-index: 20; padding: 7px 10px; border-radius: 5px;
+  background: var(--ink); color: var(--bg); font: 12px/1.4 var(--f-mono); white-space: nowrap;
+  opacity: 0; transition: opacity .12s;
+}
+.reveal-bar { transform-origin: left; animation: grow 1.4s cubic-bezier(.2,.7,.1,1) both; }
+@keyframes grow { from { transform: scaleX(.02); } }
+@media (prefers-reduced-motion: reduce) { .reveal-bar { animation: none; } }
+</style>
+
+<div id="tip" role="tooltip"></div>
+
+<main class="wrap">
+
+<section class="hero" aria-labelledby="h-hero">
+  <div class="who"><span>__NAME__</span><a href="https://github.com/__GITHUB_USER__">github.com/__GITHUB_USER__</a><span id="asof"></span><a href="__TOOL_URL__">Make your own</a></div>
+  <div class="big num" id="total">7,537<small>commits in __YEAR__, so far</small></div>
+  <h1 id="h-hero">One developer, a fleet of AI agents, and <em>__GOAL__ commits</em> by <span id="eta">mid-November</span>.</h1>
+  <p class="lede" id="hero-lede"></p>
+  <div class="rail" id="rail" aria-label="Progress toward __GOAL__ commits"></div>
+</section>
+
+<section aria-labelledby="h-cal">
+  <div class="cmd"><b>$</b><code>git log --all --since=__YEAR__-01-01 --date=short --format=%ad | sort | uniq -c</code></div>
+  <h2 id="h-cal">Then the agents clocked in.</h2>
+  <p class="lede" id="cal-lede"></p>
+  <div class="chart scroll-x" id="cal"></div>
+  <div class="legend" id="cal-legend"></div>
+</section>
+
+<section aria-labelledby="h-years">
+  <div class="cmd"><b>$</b><code>git log --all --date=format:%Y --format=%ad | sort | uniq -c</code></div>
+  <h2 id="h-years">A decade of commits, then <em>a wall</em>.</h2>
+  <p class="lede" id="years-lede"></p>
+  <div class="chart" id="years"></div>
+</section>
+
+<section aria-labelledby="h-weeks">
+  <div class="cmd"><b>$</b><code>git log --all --since=__YEAR__-01-01 --date=format:%G-W%V --format=%ad | sort | uniq -c</code></div>
+  <h2 id="h-weeks">Week by week, <em>the climb</em>.</h2>
+  <p class="lede" id="weeks-lede"></p>
+  <div class="chart" id="weeks"></div>
+</section>
+
+<section aria-labelledby="h-clock">
+  <div class="split">
+    <div>
+      <div class="cmd"><b>$</b><code>git log --all --date=format:%H:%M --format=%ad | sort | uniq -c</code></div>
+      <h2 id="h-clock">I sleep. <em>They ship.</em></h2>
+      <p class="lede" id="clock-lede"></p>
+      <div class="facts" id="clock-facts"></div>
+    </div>
+    <div class="chart" id="clock" style="margin-top:0"></div>
+  </div>
+</section>
+
+<section aria-labelledby="h-co">
+  <div class="cmd"><b>$</b><code>git log --all --format='%(trailers:key=Co-Authored-By,valueonly)' | sort | uniq -c</code></div>
+  <h2 id="h-co">Who co-wrote <em>the code</em>.</h2>
+  <p class="lede">Claude Code signs its work with a <span class="mono">Co-Authored-By</span> trailer. Codex and Copilot sometimes do. Whatever carries no trailer lands in the grey bucket, which also holds the commits I typed myself.</p>
+  <div class="stackbar" id="stackbar" role="img"></div>
+  <div class="cat-list" id="cat-list"></div>
+  <p class="lede" id="agent-note" style="margin-top:22px;font-size:14px"></p>
+</section>
+
+<section aria-labelledby="h-models">
+  <div class="cmd"><b>$</b><code>git log --all --format='%(trailers:key=Co-Authored-By,valueonly)' | grep -o 'Claude [A-Za-z]* [0-9.]*'</code></div>
+  <h2 id="h-models">Every new model goes <em>straight to work</em>.</h2>
+  <p class="lede">Weekly Claude-signed commits by model generation. The workflow is model-agnostic: runbooks and scripts stay put, the model underneath gets swapped as soon as a better one ships.</p>
+  <div class="chart" id="models"></div>
+  <div class="legend" id="models-legend"></div>
+  <div class="tiers" id="tiers"></div>
+</section>
+
+<section aria-labelledby="h-lev">
+  <div class="cmd"><b>$</b><code>find ~/.claude/projects -name '*.jsonl' | xargs jq -c 'select(.type=="assistant") | .message.content[] | select(.type=="tool_use") | .name'</code></div>
+  <h2 id="h-lev">One prompt, <em id="lev-ratio">44</em> actions.</h2>
+  <p class="lede" id="lev-lede"></p>
+  <div class="facts" id="lev-facts"></div>
+  <div class="chart" id="tools"></div>
+</section>
+
+<section aria-labelledby="h-gal">
+  <div class="cmd"><b>$</b><code>for r in */; do git -C "$r" rev-list --all --count --since=__YEAR__-01-01; done</code></div>
+  <h2 id="h-gal"><em id="gal-n">90</em> repos touched this year.</h2>
+  <p class="lede" id="gal-lede"></p>
+  <div class="chart" id="galaxy"></div>
+  <div class="legend" id="gal-legend"></div>
+</section>
+
+<section aria-labelledby="h-lang">
+  <div class="cmd"><b>$</b><code>git log --all --since=__YEAR__-01-01 --name-only --format= | sed -E 's/.*\.//' | sort | uniq -c | sort -rn</code></div>
+  <h2 id="h-lang"><em id="lang-n">14</em> languages in one year.</h2>
+  <p class="lede" id="lang-lede"></p>
+  <div class="chart" id="langs"></div>
+  <div class="legend" id="lang-legend"></div>
+  <p class="lede" id="lang-month-lede"></p>
+  <div class="chart" id="lang-months"></div>
+</section>
+
+<section aria-labelledby="h-rec">
+  <div class="cmd"><b>$</b><code>git log --all --since=__YEAR__-01-01 --format=%ad --date=format:'%F %H' | sort | uniq -c | sort -rn | head -1</code></div>
+  <h2 id="h-rec">Personal <em>records</em>.</h2>
+  <div class="facts" id="records"></div>
+</section>
+
+__PLAYBOOK__
+
+<section class="links" aria-label="Links">
+  <div class="cta">__LINKS__</div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p id="method"></p>
+    <p>Times are __TZ__, the timezone each commit recorded. Built with the agents it describes, using <a href="__TOOL_URL__">ai-commit-report</a>, an open-source tool that builds this page from any GitHub account.</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script>
+const S = __STATS__;
+const fmt = d3.format(",");
+const $ = (id) => document.getElementById(id);
+const css = (v) => `var(${v})`;
+const parse = d3.timeParse("%Y-%m-%d");
+const asof = parse(S.asof);
+const longDate = d3.timeFormat("%B %-d");
+const monthName = (iso) => d3.timeFormat("%B")(parse(iso));
+const shortDate = d3.timeFormat("%b %-d");
+const tip = $("tip");
+// Draw at the container's real pixel width so chart text stays legible on phones.
+const width = (id) => Math.max(320, Math.min(1048, $(id).clientWidth || 1000));
+function showTip(e, html) {
+  tip.innerHTML = html; tip.style.opacity = 1;
+  const x = Math.min(e.clientX + 14, window.innerWidth - tip.offsetWidth - 8);
+  tip.style.left = x + "px"; tip.style.top = (e.clientY - 38) + "px";
+}
+function hideTip() { tip.style.opacity = 0; }
+function hover(sel, html) {
+  sel.on("pointermove", (e, d) => showTip(e, html(d))).on("pointerleave", hideTip);
+}
+const cats = S.categories;
+const aiShare = Math.round(S.ai_trailer_share * 100);
+
+/* ---------- Hero ---------- */
+$("total").firstChild.nodeValue = fmt(S.total);
+$("asof").textContent = "Data as of " + longDate(asof) + ", " + S.year;
+$("eta").textContent = S.goal_reached ? longDate(parse(S.goal_reached)) : S.goal_eta ? longDate(parse(S.goal_eta)) : "year end";
+$("hero-lede").innerHTML =
+  `<strong>${fmt(S.total)} commits across ${S.repos_touched} repositories</strong> since January 1, ${aiShare}% of them signed by an AI co-author, and ${fmt(S.last12.total)} over the last twelve months. ` +
+  `At the last 30 days' pace of <strong>${Math.round(S.pace_30d)} commits a day</strong>, the year closes near <strong>${fmt(Math.round(S.projected / 100) * 100)}</strong>.`;
+
+(function rail() {
+  const W = width("rail"), H = 86, max = Math.max(S.projected, S.goal) * 1.02;
+  const x = d3.scaleLinear([0, max], [0, W]);
+  const svg = d3.select("#rail").append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img")
+    .attr("aria-label", `${fmt(S.total)} of ${fmt(S.goal)} commits; projected ${fmt(S.projected)} by December 31`);
+  const y = 26, h = 22;
+  svg.append("rect").attr("x", 0).attr("y", y).attr("width", W).attr("height", h).attr("rx", 3).style("fill", css("--h0"));
+  svg.append("rect").attr("x", x(S.total)).attr("y", y).attr("width", x(S.projected) - x(S.total)).attr("height", h)
+    .style("fill", "none").style("stroke", css("--accent")).style("stroke-dasharray", "4 4").style("stroke-width", 1.5);
+  svg.append("rect").attr("class", "reveal-bar").attr("x", 0).attr("y", y).attr("width", x(S.total)).attr("height", h).attr("rx", 3).style("fill", css("--accent"));
+  const tick = (v, label, sub, anchor, strong) => {
+    svg.append("line").attr("x1", x(v)).attr("x2", x(v)).attr("y1", y - 6).attr("y2", y + h + 6).style("stroke", css("--ink")).style("stroke-width", 2);
+    svg.append("text").attr("x", x(v)).attr("y", y - 11).attr("text-anchor", anchor).attr("class", strong ? "lbl-strong" : null).text(label);
+    if (sub) svg.append("text").attr("x", x(v)).attr("y", y + h + 22).attr("text-anchor", anchor).text(sub);
+  };
+  tick(0, "Jan 1", null, "start");
+  const narrow = W < 600;
+  tick(S.total, (narrow ? "" : "Today ") + fmt(S.total), null, "end", true);
+  if (S.goal_reached) tick(S.goal, "", fmt(S.goal) + " on " + shortDate(parse(S.goal_reached)), "end");
+  else tick(S.goal, "Goal " + fmt(S.goal), S.goal_eta ? "≈ " + shortDate(parse(S.goal_eta)) : null, narrow ? "start" : "middle", true);
+  tick(S.projected, narrow ? "" : "Dec 31 pace", (narrow ? "Dec 31 ≈ " : "≈ ") + fmt(Math.round(S.projected / 100) * 100), "end");
+})();
+
+/* ---------- Calendar ---------- */
+(function calendar() {
+  const start = new Date(S.year, 0, 1), end = new Date(S.year, 11, 31);
+  const days = d3.timeDays(start, d3.timeDay.offset(end, 1));
+  const cell = 14, gap = 3, step = cell + gap, top = 22, left = 30;
+  const week0 = d3.timeMonday.floor(start);
+  const col = (d) => d3.timeMonday.count(week0, d);
+  const row = (d) => (d.getDay() + 6) % 7;
+  const W = left + (col(end) + 1) * step, H = top + 7 * step + 4;
+  const bins = [1, 10, 30, 60, 100];
+  const ramp = ["--h1", "--h2", "--h3", "--h4", "--h5"];
+  const color = (n) => n === 0 ? css("--h0") : css(ramp[d3.bisectRight(bins, n) - 1]);
+  const svg = d3.select("#cal").append("svg").attr("viewBox", `0 0 ${W} ${H}`).style("min-width", "640px")
+    .attr("role", "img").attr("aria-label", "Daily commit calendar for " + S.year);
+  svg.selectAll("text.m").data(d3.timeMonths(start, end)).join("text")
+    .attr("x", (d) => left + col(d3.timeMonday.ceil(d)) * step).attr("y", 12).attr("font-size", 11).text(d3.timeFormat("%b"));
+  ["Mon", "", "Wed", "", "Fri", "", "Sun"].forEach((t, i) => t && svg.append("text").attr("x", 0).attr("y", top + i * step + cell - 3).attr("font-size", 10).text(t));
+  svg.selectAll("rect.d").data(days).join("rect")
+    .attr("x", (d) => left + col(d) * step).attr("y", (d) => top + row(d) * step)
+    .attr("width", cell).attr("height", cell).attr("rx", 2.5)
+    .style("fill", (d) => d > asof ? "none" : color(S.daily[d3.timeFormat("%Y-%m-%d")(d)] || 0))
+    .style("stroke", (d) => d > asof ? css("--rule") : "none")
+    .call(hover, (d) => `${d3.timeFormat("%a %b %-d")(d)} · ${d > asof ? "ahead" : fmt(S.daily[d3.timeFormat("%Y-%m-%d")(d)] || 0) + " commits"}`);
+  $("cal").scrollLeft = $("cal").scrollWidth;
+  const lg = $("cal-legend");
+  lg.innerHTML = `<span><i style="background:var(--h0)"></i>0</span>` +
+    bins.map((b, i) => `<span><i style="background:var(${ramp[i]})"></i>${b}${bins[i + 1] ? "–" + (bins[i + 1] - 1) : "+"}</span>`).join("") +
+    `<span><i style="border:1px solid var(--rule)"></i>still ahead</span>`;
+  const mk = (m) => `${S.year}-${String(m).padStart(2, "0")}`;
+  const slowSpring = (S.monthly[mk(4)] || 0) + (S.monthly[mk(5)] || 0);
+  const now = S.monthly[S.asof.slice(0, 7)];
+  $("h-cal").innerHTML = `${fmt(S.monthly[mk(1)] || 0)} commits in January. <em>${fmt(now)}</em> in ${d3.timeFormat("%B")(asof)}.`;
+  $("cal-lede").innerHTML =
+    `April and May together: <strong>${slowSpring} commits</strong>. Then the agent workflow went live and the calendar filled in. ` +
+    `Since ${longDate(d3.timeDay.offset(parse(S.longest_streak.end), 1 - S.longest_streak.days))} there has not been a single empty square: <strong>${S.longest_streak.days} days</strong> in a row.`;
+})();
+
+/* ---------- Years ---------- */
+(function years() {
+  const yrs = d3.range(2016, S.year + 1);
+  const data = yrs.map((y) => ({ y, n: S.by_year[y] || 0 }));
+  const W = width("years"), H = W < 600 ? 260 : 340, m = { t: 30, r: 10, b: 30, l: 10 }, narrow = W < 600;
+  const x = d3.scaleBand(yrs, [m.l, W - m.r]).padding(0.28);
+  const y = d3.scaleLinear([0, S.projected], [H - m.b, m.t]);
+  const svg = d3.select("#years").append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img")
+    .attr("aria-label", "Commits per year, 2016 to " + S.year);
+  svg.append("rect").attr("x", x(S.year)).attr("width", x.bandwidth()).attr("y", y(S.projected)).attr("height", y(S.total) - y(S.projected))
+    .style("fill", "none").style("stroke", css("--accent")).style("stroke-dasharray", "5 4").style("stroke-width", 1.5);
+  svg.append("text").attr("x", narrow ? x(S.year) - 6 : x(S.year) + x.bandwidth() / 2).attr("y", narrow ? y(S.projected) + 12 : y(S.projected) - 8)
+    .attr("text-anchor", narrow ? "end" : "middle").attr("font-size", narrow ? 11 : 13)
+    .text("pace: " + fmt(Math.round(S.projected / 100) * 100));
+  svg.selectAll("rect.b").data(data).join("rect")
+    .attr("x", (d) => x(d.y)).attr("width", x.bandwidth())
+    .attr("y", (d) => y(d.n)).attr("height", (d) => Math.max(1.5, y(0) - y(d.n)))
+    .style("fill", (d) => d.y === S.year ? css("--accent") : css("--c-untagged"))
+    .call(hover, (d) => `${d.y} · ${fmt(d.n)} commits`);
+  svg.selectAll("text.v").data(data).join("text")
+    .attr("x", (d) => (d.y === S.year && narrow ? x(d.y) - 6 : x(d.y) + x.bandwidth() / 2))
+    .attr("y", (d) => (d.y === S.year ? y(d.n) + (narrow ? 12 : 30) : y(d.n) - 8))
+    .attr("text-anchor", (d) => (d.y === S.year && narrow ? "end" : "middle"))
+    .attr("font-size", (d) => d.y === S.year ? (narrow ? 13 : Math.min(22, x.bandwidth() / (fmt(d.n).length * 0.62))) : (narrow ? 10 : 13)).style("fill", (d) => d.y === S.year ? css(narrow ? "--accent" : "--bg") : css("--muted"))
+    .style("font-weight", (d) => d.y === S.year ? 600 : 400).text((d) => fmt(d.n));
+  svg.selectAll("text.y").data(data).join("text")
+    .attr("x", (d) => x(d.y) + x.bandwidth() / 2).attr("y", H - 8).attr("text-anchor", "middle").attr("font-size", narrow ? 11 : 13).text((d) => narrow ? "'" + String(d.y).slice(2) : d.y);
+  const prev = S.by_year[S.year - 1] || 0;
+  const weeksLeft = Math.max(0, Math.round(d3.timeDay.count(asof, new Date(S.year, 11, 31)) / 7));
+  $("years-lede").innerHTML =
+    `My GitHub history, every repo I own or contribute to, public and private. ${S.year - 1} closed with <strong>${fmt(prev)}</strong> commits. ` +
+    `${S.year} passed that on ${shortDate(parse(Object.entries(S.daily).reduce((acc, [d, v]) => (acc.sum < prev ? { sum: acc.sum + v, day: d } : acc), { sum: 0, day: null }).day))} and is running at <strong>${Math.round(S.total / Math.max(prev, 1))}×</strong> last year with ${weeksLeft} weeks to go.`;
+})();
+
+/* ---------- Weeks ---------- */
+(function weeks() {
+  const first = d3.timeMonday.floor(new Date(S.year, 0, 1)), last = d3.timeMonday.floor(asof);
+  const totals = new Map();
+  Object.entries(S.daily).forEach(([d, n]) => {
+    const k = +d3.timeMonday.floor(parse(d));
+    totals.set(k, (totals.get(k) || 0) + n);
+  });
+  const data = d3.timeMondays(first, d3.timeDay.offset(last, 1)).map((w) => ({
+    w, n: totals.get(+w) || 0, partial: +w === +last && d3.timeDay.count(w, asof) < 6,
+  }));
+  const W = width("weeks"), narrow = W < 600, H = narrow ? 240 : 300, m = { t: 26, r: 6, b: 26, l: narrow ? 30 : 40 };
+  const x = d3.scaleBand(data.map((d) => +d.w), [m.l, W - m.r]).padding(narrow ? 0.12 : 0.2);
+  const max = d3.max(data, (d) => d.n);
+  const y = d3.scaleLinear([0, max], [H - m.b, m.t]).nice();
+  const svg = d3.select("#weeks").append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img")
+    .attr("aria-label", `Commits per week in ${S.year}, peaking at ${fmt(max)}`);
+  y.ticks(4).forEach((t) => {
+    svg.append("line").attr("x1", m.l).attr("x2", W - m.r).attr("y1", y(t)).attr("y2", y(t)).style("stroke", css("--h0")).style("stroke-width", 1);
+    svg.append("text").attr("x", m.l - 6).attr("y", y(t) + 4).attr("text-anchor", "end").attr("font-size", 11).style("fill", css("--muted")).text(narrow ? d3.format("~s")(t) : fmt(t));
+  });
+  const top = data.reduce((a, d) => (d.n > a.n ? d : a));
+  svg.selectAll("rect.w").data(data).join("rect")
+    .attr("x", (d) => x(+d.w)).attr("width", x.bandwidth())
+    .attr("y", (d) => y(d.n)).attr("height", (d) => Math.max(d.n ? 1.5 : 0, y(0) - y(d.n))).attr("rx", 1.5)
+    .style("fill", (d) => (d.partial ? "none" : css("--accent")))
+    .style("stroke", (d) => (d.partial ? css("--accent") : null)).style("stroke-dasharray", (d) => (d.partial ? "3 3" : null))
+    .style("opacity", (d) => (d === top || d.partial ? 1 : 0.78))
+    .call(hover, (d) => `Week of ${shortDate(d.w)} · ${fmt(d.n)} commits${d.partial ? " (so far)" : ""}`);
+  svg.append("text").attr("x", x(+top.w) + x.bandwidth() / 2).attr("y", y(top.n) - 7).attr("text-anchor", "middle")
+    .attr("font-size", narrow ? 11 : 13).style("font-weight", 600).style("fill", css("--ink")).text(fmt(top.n));
+  d3.timeMonths(new Date(S.year, 0, 1), d3.timeDay.offset(asof, 1)).forEach((mo, i) => {
+    if (narrow && i % 2) return;
+    const w = +d3.timeMonday.ceil(mo);
+    if (x(w) === undefined) return;
+    svg.append("text").attr("x", x(w)).attr("y", H - 8).attr("font-size", 11).style("fill", css("--muted")).text(d3.timeFormat("%b")(mo));
+  });
+  const full = data.filter((d) => !d.partial);
+  const recent = full.slice(-4), early = full.slice(0, 4);
+  const avg = (a) => Math.round(d3.mean(a, (d) => d.n));
+  $("weeks-lede").innerHTML =
+    `Commits per week since January. The first four weeks of ${S.year} averaged <strong>${fmt(avg(early))}</strong>; the last four averaged <strong>${fmt(avg(recent))}</strong>. ` +
+    `The busiest week, starting ${longDate(top.w)}, logged <strong>${fmt(top.n)}</strong>.` +
+    (data[data.length - 1].partial ? " The dashed bar is the current week so far." : "");
+})();
+
+/* ---------- Clock ---------- */
+(function clock() {
+  // 48 half-hour bars so the workday edges (config: workday.start / workday.end) land exactly on a bar boundary.
+  const toMin = (t) => { const [h, m] = t.split(":").map(Number); return h * 60 + m; };
+  const ws = toMin(S.workday.start), we = toMin(S.workday.end);
+  const clockLabel = (m) => { const h = Math.floor(m / 60), mm = m % 60; return (h % 12 || 12) + (mm ? ":" + String(mm).padStart(2, "0") : "") + (h < 12 ? " AM" : " PM"); };
+  const bins = S.half_hours.map((n, i) => ({ i, n, from: i * 30, work: i * 30 >= ws && i * 30 + 30 <= we }));
+  const size = 520, R = size / 2, r0 = 70, r1 = 186;
+  const a = d3.scaleBand(d3.range(48), [0, 2 * Math.PI]).padding(0.1);
+  const rr = d3.scaleRadial([0, d3.max(bins, (d) => d.n)], [r0, r1]);
+  const svg = d3.select("#clock").append("svg").attr("viewBox", `${-R} ${-R} ${size} ${size}`).style("max-width", "500px").style("margin", "0 auto")
+    .attr("role", "img").attr("aria-label", `Commits by time of day, workday ${clockLabel(ws)} to ${clockLabel(we)} highlighted`);
+  const angle = (m) => (m / 1440) * 2 * Math.PI;
+  svg.append("path").attr("d", d3.arc()({ innerRadius: r0 - 10, outerRadius: r1 + 8, startAngle: angle(ws), endAngle: angle(we) }))
+    .style("fill", css("--accent")).style("opacity", 0.1);
+  svg.selectAll("path.h").data(bins).join("path")
+    .attr("d", d3.arc().innerRadius(r0).outerRadius((d) => rr(d.n)).startAngle((d) => a(d.i)).endAngle((d) => a(d.i) + a.bandwidth()).padAngle(0.008).cornerRadius(1.5))
+    .style("fill", (d) => d.work ? css("--accent") : css("--night"))
+    .call(hover, (d) => `${clockLabel(d.from)} to ${clockLabel(d.from + 29)} · ${fmt(d.n)} commits`);
+  [[0, "midnight"], [360, "6 AM"], [ws, clockLabel(ws)], [720, "noon"], [we, clockLabel(we)]].forEach(([m, t]) => {
+    const ang = angle(m) - Math.PI / 2;
+    const side = Math.cos(ang);
+    svg.append("text").attr("x", Math.cos(ang) * (r1 + 14)).attr("y", Math.sin(ang) * (r1 + 20) + 4)
+      .attr("text-anchor", side > 0.3 ? "start" : side < -0.3 ? "end" : "middle").attr("font-size", 12).text(t);
+  });
+  const pct = Math.round(100 * S.offhours_commits / S.total);
+  svg.append("text").attr("text-anchor", "middle").attr("y", -2).style("font", "900 40px var(--f-display)").style("fill", css("--night")).text(pct + "%");
+  svg.append("text").attr("text-anchor", "middle").attr("y", 18).attr("font-size", 11).text("off the clock");
+  $("clock-lede").innerHTML =
+    `Each bar is half an hour of the day, all of ${S.year} stacked together. Blue is my ${clockLabel(ws)} to ${clockLabel(we)} workday. Amber is everything else, when the scheduled routines run content refreshes, KPI reports, SEO checks and outreach drafts without me. <strong>${pct}% of the year's commits</strong> landed outside the workday.`;
+  $("clock-facts").innerHTML =
+    `<div class="fact night"><b class="num">${fmt(S.offhours_commits)}</b><span>commits outside ${clockLabel(ws)} to ${clockLabel(we)}</span></div>` +
+    `<div class="fact"><b class="num">${fmt(S.night_commits)}</b><span>between midnight and 6 AM</span></div>` +
+    `<div class="fact"><b class="num">${Math.round(100 * S.weekend_commits / S.total)}%</b><span>on weekends, ${fmt(S.weekend_commits)} commits</span></div>`;
+})();
+
+/* ---------- Co-authors ---------- */
+(function coauthors() {
+  const defs = [
+    ["claude", "Claude Code", "--c-claude", "Signed by a Claude model"],
+    ["untagged", "No trailer", "--c-untagged", "Codex sessions, ChatGPT, scripts and me"],
+    ["codex", "OpenAI Codex", "--c-codex", "Signed by Codex"],
+    ["copilot", "GitHub Copilot", "--c-copilot", "Signed by Copilot"],
+  ];
+  const bar = d3.select("#stackbar").attr("aria-label", defs.map(([k, l]) => `${l} ${fmt(cats[k] || 0)}`).join(", "));
+  bar.selectAll("div").data(defs).join("div")
+    .style("flex", (d) => cats[d[0]] || 0).style("background", (d) => css(d[2]))
+    .call(hover, (d) => `${d[1]} · ${fmt(cats[d[0]] || 0)} (${(100 * (cats[d[0]] || 0) / S.total).toFixed(1)}%)`);
+  $("cat-list").innerHTML = defs.map(([k, l, c, s]) =>
+    `<div><b>${fmt(cats[k] || 0)}</b><i style="background:var(${c})"></i>${l}<br>${s}</div>`).join("");
+  const ag = S.agent_authored;
+  $("agent-note").textContent =
+    `Not counted above: ${fmt(ag.claude_worktree_agents)} commits authored directly by Claude worktree agents and ${fmt(ag.scheduled_jobs)} by my scheduled jobs, which GitHub does not credit to my profile.`;
+})();
+
+/* ---------- Models ---------- */
+(function models() {
+  const gens = [
+    ["4.x", "Claude 4.x", "--h1"], ["5", "Claude 5", "--h2"], ["5.1", "Fable 5.1", "--h3"], ["5.5", "Claude 5.5", "--h4"],
+  ];
+  const genOf = (fam) => fam.endsWith("4.x") ? "4.x" : fam.endsWith("5.5") ? "5.5" : fam.endsWith("5.1") ? "5.1" : "5";
+  const weeks = Object.keys(S.weekly_models).filter((w) => w >= `${S.year}-06-01`);
+  const rows = weeks.map((w) => {
+    const o = { w: parse(w) };
+    gens.forEach(([g]) => (o[g] = 0));
+    Object.entries(S.weekly_models[w]).forEach(([f, n]) => (o[genOf(f)] += n));
+    return o;
+  });
+  const stack = d3.stack().keys(gens.map((g) => g[0]))(rows);
+  const W = width("models"), H = W < 600 ? 240 : 320, m = { t: 14, r: 12, b: 28, l: 44 };
+  const x = d3.scaleTime(d3.extent(rows, (d) => d.w), [m.l, W - m.r]);
+  const y = d3.scaleLinear().domain([0, d3.max(stack.at(-1), (d) => d[1])]).nice().range([H - m.b, m.t]);
+  const svg = d3.select("#models").append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img")
+    .attr("aria-label", "Weekly Claude-signed commits by model generation");
+  svg.append("g").selectAll("line").data(y.ticks(5)).join("line")
+    .attr("x1", m.l).attr("x2", W - m.r).attr("y1", y).attr("y2", y).style("stroke", css("--rule"));
+  svg.append("g").selectAll("text").data(y.ticks(5)).join("text")
+    .attr("x", m.l - 8).attr("y", (d) => y(d) + 4).attr("text-anchor", "end").attr("font-size", 12).text(fmt);
+  svg.append("g").selectAll("text").data(d3.timeMonth.range(x.domain()[0], x.domain()[1])).join("text")
+    .attr("x", x).attr("y", H - 6).attr("font-size", 12).text(d3.timeFormat("%b"));
+  const area = d3.area().curve(d3.curveMonotoneX).x((d) => x(d.data.w)).y0((d) => y(d[0])).y1((d) => y(d[1]));
+  svg.append("g").selectAll("path").data(stack).join("path").attr("d", area)
+    .style("fill", (d) => css(gens.find((g) => g[0] === d.key)[2]))
+    .call(hover, (d) => gens.find((g) => g[0] === d.key)[1]);
+  $("models-legend").innerHTML = gens.map(([, l, c]) => `<span><i style="background:var(${c})"></i>${l}</span>`).join("") +
+    `<span>Last week is partial</span>`;
+  const tier = (t) => d3.sum(Object.entries(S.model_totals).filter(([f]) => f.startsWith(t)), (d) => d[1]);
+  $("tiers").innerHTML = [
+    ["Opus", "judgment, design, review"], ["Sonnet", "the volume tier"], ["Fable", "specs for others to build"], ["Haiku", "bulk mechanical work"],
+  ].map(([t, s]) => `<div><b>${fmt(tier(t))}</b><span>${t}</span><p>${s}</p></div>`).join("");
+})();
+
+/* ---------- Leverage ---------- */
+(function leverage() {
+  const s = S.sessions;
+  if (!s) return;
+  const ratio = Math.round(s.claude_tool_calls / s.claude_prompts);
+  $("lev-ratio").textContent = ratio;
+  $("lev-lede").innerHTML =
+    `From the Claude Code transcripts still on disk (${s.first_day ? monthName(s.first_day) + " to " + monthName(s.last_day) : "local history"}): every prompt I typed or scheduled set off <strong>${ratio} tool calls</strong> on average. ` +
+    `Agents spawn their own sub-agents, read and edit files, search the web and drive a browser, then commit the result.`;
+  $("lev-facts").innerHTML = [
+    [fmt(s.claude_prompts), "prompts, typed or scheduled", ""],
+    [fmt(s.claude_sessions), "Claude Code sessions", ""],
+    [fmt(s.claude_subagents), "sub-agents spawned by those sessions", ""],
+    [fmt(s.claude_tool_calls), "tool calls executed", "hl"],
+  ].map(([b, t, c]) => `<div class="fact ${c}"><b class="num">${b}</b><span>${t}</span></div>`).join("");
+
+  // Rows come pre-labelled from scripts/aggregate.py: shell calls are grouped by what they run
+  // (git, python, grep...), with the three most common commands as the detail line.
+  const rows = S.tool_rows;
+  const W = width("tools"), rowH = 58, H = rows.length * rowH;
+  const x = d3.scaleLinear([0, rows[0].count], [0, W - 70]);
+  const svg = d3.select("#tools").append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img").attr("aria-label", "Agent actions by type");
+  const g = svg.selectAll("g").data(rows).join("g").attr("transform", (d, i) => `translate(0,${i * rowH})`);
+  g.append("text").attr("x", 0).attr("y", 14).attr("font-size", 14).style("font-weight", 600).style("fill", css("--ink")).style("font-family", "var(--f-body)").text((d) => d.label);
+  g.append("rect").attr("class", "reveal-bar").attr("x", 0).attr("y", 21).attr("height", 12).attr("width", (d) => x(d.count)).attr("rx", 2)
+    .style("fill", (d, i) => i === 0 ? css("--accent") : css("--h2"));
+  g.append("text").attr("x", (d) => x(d.count) + 8).attr("y", 32).attr("font-size", 13).text((d) => fmt(d.count));
+  g.append("text").attr("x", 0).attr("y", 44).attr("font-size", 11).text((d) => d.detail);
+})();
+
+/* ---------- Galaxy ---------- */
+(function galaxy() {
+  const langs = ["Python", "TypeScript", "HTML", "JavaScript", "Ruby"];
+  const lc = { Python: "--c-claude", TypeScript: "--c-codex", HTML: "--c-auto", JavaScript: "--c-copilot", Ruby: "--h5" };
+  const color = (l) => css(lc[l] || "--c-untagged");
+  const W = width("galaxy"), H = Math.round(W * (W < 600 ? 0.95 : 0.62));
+  const root = d3.pack().size([W, H]).padding(5)(d3.hierarchy({ children: S.top_repos }).sum((d) => d.commits));
+  const svg = d3.select("#galaxy").append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img")
+    .attr("aria-label", "Top repositories by commits this year");
+  const node = svg.selectAll("g").data(root.leaves()).join("g").attr("transform", (d) => `translate(${d.x},${d.y})`);
+  node.append("circle").attr("r", (d) => d.r).style("fill", (d) => color(d.data.language)).style("fill-opacity", 0.88)
+    .call(hover, (d) => `${d.data.name ? d.data.name + " · " : ""}${fmt(d.data.commits)} commits${d.data.language ? " · " + d.data.language : ""}`);
+  // Shortest readable label that fits: full name, else its first word; font shrinks to fit the circle.
+  // Masked repos have an empty name and get a number only. Radius cutoffs come from report-config.json.
+  const fit = (d) => {
+    const word = d.data.name.split(/ |\.(?=[a-z]+$)/)[0];
+    const name = d.data.name.length * 0.56 * 14 <= d.r * 1.7 ? d.data.name : word;
+    return { name, size: Math.min(17, d.r / 4.2, (d.r * 1.7) / (name.length * 0.56)) };
+  };
+  const named = (d) => d.data.name && d.r > S.label_min_radius;
+  node.filter(named).append("text").attr("text-anchor", "middle").attr("y", -2)
+    .style("fill", css("--bg")).style("font", (d) => `600 ${fit(d).size}px var(--f-body)`).style("pointer-events", "none")
+    .text((d) => fit(d).name);
+  const numSize = (d) => named(d) ? Math.min(13, d.r / 5.5) : Math.min(20, d.r * 0.8, (d.r * 1.7) / (String(d.data.commits).length * 0.62));
+  node.filter((d) => d.r > S.number_min_radius).append("text").attr("text-anchor", "middle")
+    .attr("y", (d) => (named(d) ? fit(d).size + 4 : numSize(d) * 0.35))
+    .style("fill", css("--bg")).style("font", (d) => `${named(d) ? 400 : 600} ${numSize(d)}px var(--f-mono)`).style("pointer-events", "none")
+    .text((d) => fmt(d.data.commits));
+  $("gal-n").textContent = S.repos_touched;
+  const top = S.top_repos, topNamed = top.filter((d) => d.name);
+  $("gal-lede").innerHTML =
+    `The ${top.length} busiest, sized by commits. Live sites, a browser-based space city simulation, a black hole flight, forum migrations, the agent fleet's own configuration, and the home lab. ` +
+    `<strong>${topNamed[0].name}</strong> and <strong>${topNamed[1].name}</strong> alone took ${fmt(topNamed[0].commits + topNamed[1].commits)} commits.`;
+  $("gal-legend").innerHTML = langs.map((l) => `<span><i style="background:${color(l)}"></i>${l}</span>`).join("") +
+    `<span><i style="background:var(--c-untagged)"></i>Other</span>`;
+})();
+
+/* ---------- Languages ---------- */
+const andList = (a) => a.length < 2 ? a.join("") : a.slice(0, -1).join(", ") + " and " + a[a.length - 1];
+(function languages() {
+  const rows = S.languages_touched.slice(0, 24);
+  const code = rows.filter((l) => l.kind === "code");
+  const fresh = S.languages_touched.filter((l) => l.kind === "code" && l.new_this_year).sort((a, b) => a.first_ever < b.first_ever ? -1 : 1);
+  const widest = code.reduce((a, l) => (l.repos > a.repos ? l : a));
+  const words = ["None", "One", "Two", "Three", "Four", "Five", "Six"];
+  $("lang-n").textContent = S.language_count;
+  $("lang-lede").innerHTML =
+    `Every commit lists the files it changed. This counts the commits that touched each file type, so one commit can count for several. ` +
+    `<strong>${code.slice(0, 3).map((l) => l.name).join(", ")}</strong> lead among the programming languages, with ${S.language_count} in all, and ${widest.name} alone shows up in <strong>${widest.repos} repos</strong>. ` +
+    (fresh.length ? `<strong>${words[fresh.length] || fresh.length} never appeared in my GitHub history before this year:</strong> ${andList(fresh.map((l) => l.name))}, ${fmt(d3.sum(fresh, (l) => l.commits))} commits since ${longDate(parse(fresh[0].first_ever))}. ` : "") +
+    `Markdown and JSON sit at the top because the agents write runbooks, specs and data files alongside the code.`;
+  const W = width("langs"), narrow = W < 600, rowH = 30, H = rows.length * rowH, labelW = narrow ? 92 : 120;
+  const x = d3.scaleLinear([0, rows[0].commits], [0, W - labelW - (narrow ? 150 : 330)]);
+  const svg = d3.select("#langs").append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img")
+    .attr("aria-label", "Commits touching each language, with repo count and Claude co-authored share");
+  const g = svg.selectAll("g").data(rows).join("g").attr("transform", (d, i) => `translate(0,${i * rowH})`)
+    .call(hover, (d) => `${d.name} · ${fmt(d.commits)} commits (${Math.round(100 * d.commits / S.total)}% of the year)<br>${d.repos} repos · ${Math.round(100 * d.claude_share)}% co-authored by Claude<br>` +
+      (d.new_this_year ? `First commit ever: ${longDate(parse(d.first_ever))}, ${S.year}` : `In my history since ${d.first_ever.slice(0, 4)}`));
+  g.append("rect").attr("x", 0).attr("y", 0).attr("width", W).attr("height", rowH).style("fill", "transparent");
+  g.append("text").attr("x", labelW - 10).attr("y", 19).attr("text-anchor", "end").attr("font-size", 13).style("fill", css("--ink")).text((d) => (narrow && d.name.length > 11 ? d.name.split(" ")[0] : d.name));
+  g.append("rect").attr("class", "reveal-bar").attr("x", labelW).attr("y", 7).attr("height", 16).attr("width", (d) => Math.max(2, x(d.commits))).attr("rx", 2)
+    .style("fill", (d) => d.kind === "code" ? css("--accent") : css("--c-untagged")).style("fill-opacity", (d) => d.kind === "code" ? 1 : 0.55);
+  const val = g.append("text").attr("x", (d) => labelW + Math.max(2, x(d.commits)) + 8).attr("y", 19).attr("font-size", 12)
+    .text((d) => narrow ? `${fmt(d.commits)} · ${d.repos} repos` : `${fmt(d.commits)}  ·  ${d.repos} repos  ·  ${Math.round(100 * d.claude_share)}% Claude`);
+  val.each(function (d) {
+    if (!d.new_this_year) return;
+    const end = +this.getAttribute("x") + this.getComputedTextLength() + 10;
+    const tag = narrow ? "NEW" : `NEW IN ${S.year}`;
+    const tg = d3.select(this.parentNode).append("g").attr("transform", `translate(${end},6)`);
+    const t = tg.append("text").attr("x", 7).attr("y", 13).attr("font-size", 10.5).style("font-weight", 700).style("letter-spacing", ".06em").style("fill", css("--bg")).text(tag);
+    tg.insert("rect", "text").attr("width", t.node().getComputedTextLength() + 14).attr("height", 18).attr("rx", 9).style("fill", css("--accent"));
+  });
+  $("lang-legend").innerHTML =
+    `<span><i style="background:var(--accent)"></i>Programming languages</span><span><i style="background:var(--c-untagged);opacity:.55"></i>Docs, data, 3D models and graphics</span>` +
+    `<span>Repos: where the language was committed this year${narrow ? "" : ". Claude: share of those commits with a Claude co-author trailer"}.</span>`;
+})();
+
+/* ---------- Languages by month ---------- */
+(function languageMonths() {
+  const langs = S.languages_touched.filter((l) => l.kind === "code" && l.commits >= 10).map((l) => l.name);
+  const months = d3.timeMonths(new Date(S.year, 0, 1), d3.timeDay.offset(asof, 1));
+  const key = d3.timeFormat("%Y-%m"), mon = d3.timeFormat("%b"), monthName = d3.timeFormat("%B");
+  const val = (l, m) => (S.language_month[key(m)] || {})[l] || 0;
+  const peak = new Map(langs.map((l) => [l, d3.max(months, (m) => val(l, m))]));
+  const firstMonth = new Map(S.languages_touched.filter((l) => l.new_this_year).map((l) => [l.name, l.first_ever.slice(0, 7)]));
+  const W = width("lang-months"), narrow = W < 600, labelW = narrow ? 92 : 120, rowH = narrow ? 22 : 28, top = 20, gap = 3;
+  const cw = (W - labelW) / months.length, H = top + langs.length * rowH;
+  const level = (n, p) => (n <= 0 ? 0 : Math.min(5, Math.max(1, Math.ceil((5 * n) / p))));
+  const svg = d3.select("#lang-months").append("svg").attr("viewBox", `0 0 ${W} ${H}`).attr("role", "img")
+    .attr("aria-label", `Commits per month for each programming language in ${S.year}`);
+  months.forEach((m, j) => svg.append("text").attr("x", labelW + j * cw + (cw - gap) / 2).attr("y", 13).attr("text-anchor", "middle")
+    .attr("font-size", 11).style("fill", css("--muted")).text(narrow ? mon(m)[0] : mon(m)));
+  langs.forEach((l, i) => {
+    const y = top + i * rowH;
+    svg.append("text").attr("x", labelW - 10).attr("y", y + (rowH - gap) / 2 + 4.5).attr("text-anchor", "end").attr("font-size", narrow ? 12 : 13)
+      .style("fill", css("--ink")).text(l);
+    months.forEach((m, j) => {
+      const n = val(l, m), lv = level(n, peak.get(l)), first = firstMonth.get(l) === key(m);
+      svg.append("rect").attr("x", labelW + j * cw).attr("y", y).attr("width", cw - gap).attr("height", rowH - gap).attr("rx", 2)
+        .style("fill", css("--h" + lv)).style("stroke", first ? css("--night") : null).style("stroke-width", first ? 3 : null)
+        .call(hover, () => `${l} · ${mon(m)} ${S.year} · ${fmt(n)} commits${key(m) === key(asof) ? " (to date)" : ""}${first ? "<br>First commit ever" : ""}`);
+      if (!narrow && n) svg.append("text").attr("x", labelW + j * cw + (cw - gap) / 2).attr("y", y + (rowH - gap) / 2 + 4).attr("text-anchor", "middle")
+        .attr("font-size", 11).style("pointer-events", "none").style("fill", css(lv >= 3 ? "--bg" : "--ink")).text(fmt(n));
+    });
+  });
+  const lead = (m) => langs.reduce((a, l) => (val(l, m) > val(a, m) ? l : a), langs[0]);
+  const full = months.filter((m) => key(m) !== key(asof));
+  const firstM = full[0], lastM = full[full.length - 1];
+  $("lang-month-lede").innerHTML =
+    `The same languages month by month. Each row is shaded against its own busiest month, so a small language still shows when it was in use. ` +
+    `In ${monthName(firstM)} the most-touched language was <strong>${lead(firstM)}</strong>; in ${monthName(lastM)} it was <strong>${lead(lastM)}</strong>.` +
+    (firstMonth.size ? ` Amber outlines mark the month a language got its first commit ever.` : "");
+})();
+
+/* ---------- Records ---------- */
+(function records() {
+  const bh = S.busiest_hour.hour.split(" ");
+  $("records").innerHTML = [
+    [fmt(S.busiest_day.commits), `commits on the busiest day, ${longDate(parse(S.busiest_day.date))}`, "hl"],
+    [fmt(S.busiest_hour.commits), `commits in one hour, ${shortDate(parse(bh[0]))} at ${+bh[1]}:00`, ""],
+    [S.longest_streak.days, "day streak without a zero, still running", ""],
+    [S.language_count, "programming languages, led by " + S.languages_touched.filter((l) => l.kind === "code").slice(0, 3).map((l) => l.name).join(", "), ""],
+  ].map(([b, t, c]) => `<div class="fact ${c}"><b class="num">${b}</b><span>${t}</span></div>`).join("");
+  if ($("play-pace")) $("play-pace").textContent = Math.floor(S.pace_30d / 10) * 10;
+  $("method").textContent =
+    `Method: blobless clones of all ${S.repos_scanned} GitHub repositories I own, contribute to or reach through an organization, every branch, deduplicated by SHA. ` +
+    `Counted commits are authored under my own identities, work repositories included. Upstream authors in forks, dependabot, Claude worktree agents and cron jobs are excluded from the headline numbers. ` +
+    `AI attribution comes from Co-Authored-By trailers. GitHub's profile graph differs a little: it counts only default-branch commits and adds pull requests and issues. Generated ${longDate(asof)}, ${S.year}.`;
+})();
+</script>

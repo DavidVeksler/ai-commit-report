@@ -1,0 +1,294 @@
+{
+  "_comment": "Every knob for the report lives here or in display-names.json. Edit, then run scripts/refresh.ps1 --skip-fetch (or scripts/aggregate.py + scripts/build.py for config-only changes). README.md explains each field.",
+  "profile": {
+    "github_user": "DavidVeksler",
+    "name": "David Veksler",
+    "_identity": "Your own commits are matched by the GitHub account's noreply address, your `git config user.email`, any address in the COMMIT_REPORT_EMAILS environment variable, and these case-insensitive regexes over author name + email.",
+    "identity_patterns": [
+      "veksler"
+    ],
+    "bot_authors": [
+      "github-actions[bot]",
+      "objectivismonline cron"
+    ],
+    "timezone_label": "Mountain Time",
+    "links": [
+      {
+        "label": "Case studies",
+        "href": "https://davidveksler.com/work/",
+        "primary": true
+      },
+      {
+        "label": "Make your own report",
+        "href": "https://github.com/DavidVeksler/ai-commit-report"
+      },
+      {
+        "label": "GitHub profile",
+        "href": "https://github.com/DavidVeksler"
+      }
+    ],
+    "playbook": "data/playbook.html"
+  },
+  "site": {
+    "_comment": "Head tags for dist/index.html. Leave canonical empty to omit canonical, og:url and og:image.",
+    "title": "2026 in Commits — David Veksler",
+    "description": "An interactive report of David Veksler's 2026 GitHub history: thousands of AI-assisted commits across about 100 repos, when they landed, which models co-wrote them, and what the agents did.",
+    "canonical": "https://davidveksler.com/commits/",
+    "og_image": "https://davidveksler.com/commits/og.png",
+    "author_url": "https://davidveksler.com/",
+    "person_id": "https://davidveksler.com/#person",
+    "website_id": "https://davidveksler.com/#website",
+    "publish_dir": "../davidveksler.com/public/commits"
+  },
+  "year": 2026,
+  "goal": 10000,
+  "workday": {
+    "start": "08:30",
+    "end": "17:00"
+  },
+  "exclude_owners": [],
+  "_mask": "Owners or owner/repo names whose repos render as a bare commit number. Plain names work; a 'sha256:' entry (scripts/mask.py prints one) keeps the name itself out of a public config.",
+  "mask_owners": [
+    "sha256:13fb148d4c2dc8f3e7017a4fe5aec9197386214dbb689670301e8d41dce1e619"
+  ],
+  "mask_repos": [
+    "sha256:f9328f68c639cbe6403d1ac85dcf2c2317e096b70b3512d63d50f2872365709a"
+  ],
+  "top_repos": 40,
+  "label_min_radius": 30,
+  "number_min_radius": 11,
+  "shell_buckets": [
+    [
+      "Git and GitHub",
+      "^(git|gh)\\b"
+    ],
+    [
+      "Python scripts",
+      "^(python|python3|py|pip|uv|pytest|ruff)$"
+    ],
+    [
+      "Node and build tools",
+      "^(node|npm|npx|pnpm|yarn|tsc|vite|vitest|esbuild|astro|dotnet|cargo|go|make|ffmpeg|blender|Blender)$"
+    ],
+    [
+      "Deploy and servers",
+      "^(wrangler|ssh|scp|rsync|docker|systemctl|nginx|az|azcopy|.*deploy.*)$"
+    ],
+    [
+      "Web requests",
+      "^(curl|wget|Invoke-WebRequest|Invoke-RestMethod|iwr|irm)$"
+    ],
+    [
+      "Search and read files",
+      "^(grep|rg|ls|cat|head|tail|find|wc|sed|awk|sort|jq|cut|diff|stat|file|tree|Get-ChildItem|Get-Content|Select-String|Test-Path|dir|type|od|du|which|where)$"
+    ],
+    [
+      "Write and move files",
+      "^(mkdir|cp|mv|rm|touch|chmod|Set-Content|Out-File|New-Item|Copy-Item|Move-Item|Remove-Item|cat_write|tee)$"
+    ],
+    [
+      "Windows system commands",
+      "^(Get-|Start-|Stop-|Test-|Select-|Import-|Add-|Invoke-|netstat|tasklist|taskkill|cmd|wsl|reg|schtasks)"
+    ],
+    [
+      "Scripts in the repo",
+      "^(script|bash|sh|powershell|pwsh)$"
+    ]
+  ],
+  "tool_labels": {
+    "Read": "Read a file",
+    "Edit": "Edit a file",
+    "Write": "Write a file",
+    "WebSearch": "Search the web",
+    "WebFetch": "Fetch a web page",
+    "Agent": "Launch a sub-agent",
+    "Grep": "Search code",
+    "ToolSearch": "Look up a tool",
+    "browser": "Drive a browser",
+    "gmail": "Search Gmail"
+  },
+  "tool_chart_rows": 12,
+  "language_min_commits": 10,
+  "languages": {
+    "_comment": "File extension -> language. kind 'code' counts toward the language total; 'prose', 'data' and 'asset' (3D models, CAD, vector art) are shown muted and do not count. Unlisted extensions (raster images, lockfiles, dotfiles) are ignored.",
+    "Python": {
+      "kind": "code",
+      "ext": [
+        ".py"
+      ]
+    },
+    "TypeScript": {
+      "kind": "code",
+      "ext": [
+        ".ts",
+        ".tsx"
+      ]
+    },
+    "JavaScript": {
+      "kind": "code",
+      "ext": [
+        ".js",
+        ".mjs",
+        ".cjs",
+        ".jsx",
+        ".gjs"
+      ]
+    },
+    "HTML": {
+      "kind": "code",
+      "ext": [
+        ".html",
+        ".htm"
+      ]
+    },
+    "CSS": {
+      "kind": "code",
+      "ext": [
+        ".css",
+        ".scss"
+      ]
+    },
+    "C#": {
+      "kind": "code",
+      "ext": [
+        ".cs"
+      ]
+    },
+    "PowerShell": {
+      "kind": "code",
+      "ext": [
+        ".ps1",
+        ".psm1"
+      ]
+    },
+    "Shell": {
+      "kind": "code",
+      "ext": [
+        ".sh"
+      ]
+    },
+    "Ruby": {
+      "kind": "code",
+      "ext": [
+        ".rb"
+      ]
+    },
+    "PHP": {
+      "kind": "code",
+      "ext": [
+        ".php"
+      ]
+    },
+    "Astro": {
+      "kind": "code",
+      "ext": [
+        ".astro"
+      ]
+    },
+    "Nunjucks": {
+      "kind": "code",
+      "ext": [
+        ".njk"
+      ]
+    },
+    "SQL": {
+      "kind": "code",
+      "ext": [
+        ".sql"
+      ]
+    },
+    "Java": {
+      "kind": "code",
+      "ext": [
+        ".java"
+      ]
+    },
+    "Batch": {
+      "kind": "code",
+      "ext": [
+        ".bat",
+        ".cmd"
+      ]
+    },
+    "Markdown": {
+      "kind": "prose",
+      "ext": [
+        ".md"
+      ]
+    },
+    "Text": {
+      "kind": "prose",
+      "ext": [
+        ".txt"
+      ]
+    },
+    "JSON": {
+      "kind": "data",
+      "ext": [
+        ".json",
+        ".jsonc",
+        ".jsonl"
+      ]
+    },
+    "YAML": {
+      "kind": "data",
+      "ext": [
+        ".yml",
+        ".yaml"
+      ]
+    },
+    "CSV": {
+      "kind": "data",
+      "ext": [
+        ".csv",
+        ".tsv"
+      ]
+    },
+    "Blender": {
+      "kind": "asset",
+      "ext": [
+        ".blend"
+      ]
+    },
+    "glTF 3D model": {
+      "kind": "asset",
+      "ext": [
+        ".glb",
+        ".gltf"
+      ]
+    },
+    "3D print mesh": {
+      "kind": "asset",
+      "ext": [
+        ".stl",
+        ".obj",
+        ".3mf",
+        ".fbx",
+        ".ply"
+      ]
+    },
+    "CAD": {
+      "kind": "asset",
+      "ext": [
+        ".step",
+        ".stp",
+        ".dxf",
+        ".scad",
+        ".dwg"
+      ]
+    },
+    "USD scene": {
+      "kind": "asset",
+      "ext": [
+        ".usd",
+        ".usdz"
+      ]
+    },
+    "SVG": {
+      "kind": "asset",
+      "ext": [
+        ".svg"
+      ]
+    }
+  }
+}

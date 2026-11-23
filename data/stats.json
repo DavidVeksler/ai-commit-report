@@ -1,0 +1,1490 @@
+{
+ "asof": "2026-11-22",
+ "year": 2026,
+ "goal": 10000,
+ "total": 11148,
+ "last12": {
+  "start": "2025-11-23",
+  "end": "2026-11-22",
+  "total": 11430
+ },
+ "agent_authored": {
+  "claude_worktree_agents": 123,
+  "scheduled_jobs": 480
+ },
+ "projected": 15214,
+ "pace_30d": 104.3,
+ "goal_eta": null,
+ "goal_reached": "2026-11-10",
+ "repos_scanned": 168,
+ "repos_touched": 106,
+ "languages_touched": [
+  {
+   "name": "Markdown",
+   "commits": 6388,
+   "kind": "prose",
+   "repos": 88,
+   "claude_share": 0.756,
+   "first_ever": "2013-06-18",
+   "new_this_year": false
+  },
+  {
+   "name": "JSON",
+   "commits": 3782,
+   "kind": "data",
+   "repos": 49,
+   "claude_share": 0.716,
+   "first_ever": "2016-04-02",
+   "new_this_year": false
+  },
+  {
+   "name": "Python",
+   "commits": 1754,
+   "kind": "code",
+   "repos": 49,
+   "claude_share": 0.852,
+   "first_ever": "2021-12-21",
+   "new_this_year": false
+  },
+  {
+   "name": "JavaScript",
+   "commits": 1720,
+   "kind": "code",
+   "repos": 32,
+   "claude_share": 0.806,
+   "first_ever": "2013-06-18",
+   "new_this_year": false
+  },
+  {
+   "name": "TypeScript",
+   "commits": 1556,
+   "kind": "code",
+   "repos": 10,
+   "claude_share": 0.807,
+   "first_ever": "2020-11-17",
+   "new_this_year": false
+  },
+  {
+   "name": "HTML",
+   "commits": 1040,
+   "kind": "code",
+   "repos": 35,
+   "claude_share": 0.627,
+   "first_ever": "2016-04-02",
+   "new_this_year": false
+  },
+  {
+   "name": "Text",
+   "commits": 504,
+   "kind": "prose",
+   "repos": 29,
+   "claude_share": 0.79,
+   "first_ever": "2019-10-20",
+   "new_this_year": false
+  },
+  {
+   "name": "Shell",
+   "commits": 435,
+   "kind": "code",
+   "repos": 40,
+   "claude_share": 0.839,
+   "first_ever": "2020-07-27",
+   "new_this_year": false
+  },
+  {
+   "name": "CSS",
+   "commits": 434,
+   "kind": "code",
+   "repos": 29,
+   "claude_share": 0.758,
+   "first_ever": "2013-06-18",
+   "new_this_year": false
+  },
+  {
+   "name": "C#",
+   "commits": 432,
+   "kind": "code",
+   "repos": 7,
+   "claude_share": 0.516,
+   "first_ever": "2013-06-18",
+   "new_this_year": false
+  },
+  {
+   "name": "YAML",
+   "commits": 415,
+   "kind": "data",
+   "repos": 50,
+   "claude_share": 0.805,
+   "first_ever": "2020-01-08",
+   "new_this_year": false
+  },
+  {
+   "name": "PowerShell",
+   "commits": 344,
+   "kind": "code",
+   "repos": 44,
+   "claude_share": 0.834,
+   "first_ever": "2024-08-06",
+   "new_this_year": false
+  },
+  {
+   "name": "glTF 3D model",
+   "commits": 242,
+   "kind": "asset",
+   "repos": 4,
+   "claude_share": 0.967,
+   "first_ever": "2025-05-30",
+   "new_this_year": false
+  },
+  {
+   "name": "CSV",
+   "commits": 215,
+   "kind": "data",
+   "repos": 13,
+   "claude_share": 0.8,
+   "first_ever": "2016-06-11",
+   "new_this_year": false
+  },
+  {
+   "name": "PHP",
+   "commits": 180,
+   "kind": "code",
+   "repos": 10,
+   "claude_share": 0.672,
+   "first_ever": "2020-01-08",
+   "new_this_year": false
+  },
+  {
+   "name": "Ruby",
+   "commits": 140,
+   "kind": "code",
+   "repos": 2,
+   "claude_share": 0.829,
+   "first_ever": "2026-08-18",
+   "new_this_year": true
+  },
+  {
+   "name": "SVG",
+   "commits": 128,
+   "kind": "asset",
+   "repos": 13,
+   "claude_share": 0.703,
+   "first_ever": "2013-10-04",
+   "new_this_year": false
+  },
+  {
+   "name": "Astro",
+   "commits": 112,
+   "kind": "code",
+   "repos": 2,
+   "claude_share": 0.643,
+   "first_ever": "2026-07-08",
+   "new_this_year": true
+  },
+  {
+   "name": "Nunjucks",
+   "commits": 109,
+   "kind": "code",
+   "repos": 3,
+   "claude_share": 0.743,
+   "first_ever": "2026-07-07",
+   "new_this_year": true
+  },
+  {
+   "name": "SQL",
+   "commits": 36,
+   "kind": "code",
+   "repos": 10,
+   "claude_share": 0.806,
+   "first_ever": "2013-10-04",
+   "new_this_year": false
+  },
+  {
+   "name": "Batch",
+   "commits": 17,
+   "kind": "code",
+   "repos": 8,
+   "claude_share": 0.529,
+   "first_ever": "2022-11-17",
+   "new_this_year": false
+  }
+ ],
+ "language_count": 14,
+ "language_month": {
+  "2026-01": {
+   "C#": 84,
+   "Markdown": 23,
+   "JSON": 3,
+   "Text": 1,
+   "Shell": 1,
+   "HTML": 11
+  },
+  "2026-02": {
+   "Markdown": 30,
+   "C#": 103,
+   "JSON": 21,
+   "YAML": 10,
+   "PowerShell": 4,
+   "CSV": 2,
+   "Shell": 9,
+   "HTML": 4,
+   "Python": 2
+  },
+  "2026-03": {
+   "C#": 61,
+   "Markdown": 18,
+   "JSON": 13,
+   "PowerShell": 1,
+   "YAML": 1,
+   "Shell": 2,
+   "HTML": 4,
+   "Python": 1
+  },
+  "2026-04": {
+   "Python": 2
+  },
+  "2026-05": {
+   "HTML": 7
+  },
+  "2026-06": {
+   "C#": 31,
+   "Markdown": 143,
+   "JSON": 24,
+   "PowerShell": 7,
+   "Python": 27,
+   "SQL": 3,
+   "Shell": 10,
+   "YAML": 13,
+   "JavaScript": 60,
+   "CSV": 9,
+   "HTML": 107,
+   "PHP": 23,
+   "SVG": 1,
+   "CSS": 22
+  },
+  "2026-07": {
+   "C#": 42,
+   "Markdown": 689,
+   "JSON": 209,
+   "YAML": 51,
+   "Shell": 71,
+   "Python": 116,
+   "Text": 46,
+   "SQL": 8,
+   "HTML": 227,
+   "CSV": 35,
+   "TypeScript": 59,
+   "CSS": 72,
+   "JavaScript": 146,
+   "Astro": 49,
+   "PowerShell": 37,
+   "SVG": 4,
+   "Batch": 4,
+   "PHP": 60,
+   "Nunjucks": 28
+  },
+  "2026-08": {
+   "C#": 57,
+   "Markdown": 1058,
+   "JSON": 641,
+   "SQL": 12,
+   "Python": 360,
+   "PowerShell": 71,
+   "Shell": 140,
+   "Text": 40,
+   "JavaScript": 87,
+   "YAML": 40,
+   "Astro": 36,
+   "TypeScript": 46,
+   "CSS": 79,
+   "CSV": 38,
+   "HTML": 162,
+   "PHP": 37,
+   "Ruby": 138,
+   "SVG": 3,
+   "Batch": 3,
+   "Nunjucks": 40
+  },
+  "2026-09": {
+   "JSON": 677,
+   "C#": 39,
+   "Markdown": 1116,
+   "PowerShell": 72,
+   "YAML": 126,
+   "Python": 359,
+   "SQL": 10,
+   "Shell": 113,
+   "JavaScript": 99,
+   "Text": 169,
+   "Astro": 16,
+   "TypeScript": 40,
+   "CSS": 75,
+   "SVG": 10,
+   "HTML": 185,
+   "CSV": 55,
+   "PHP": 53,
+   "Ruby": 1,
+   "Batch": 4,
+   "Nunjucks": 33
+  },
+  "2026-10": {
+   "C#": 4,
+   "Markdown": 1649,
+   "Python": 425,
+   "JSON": 1145,
+   "SQL": 2,
+   "TypeScript": 756,
+   "Text": 172,
+   "JavaScript": 668,
+   "CSV": 54,
+   "Shell": 32,
+   "PowerShell": 119,
+   "CSS": 107,
+   "HTML": 196,
+   "Astro": 10,
+   "PHP": 5,
+   "SVG": 27,
+   "YAML": 147,
+   "glTF 3D model": 139,
+   "Batch": 5,
+   "Ruby": 1,
+   "Nunjucks": 8
+  },
+  "2026-11": {
+   "Python": 462,
+   "Markdown": 1662,
+   "Text": 76,
+   "JSON": 1049,
+   "C#": 11,
+   "YAML": 27,
+   "Shell": 57,
+   "HTML": 137,
+   "PowerShell": 33,
+   "CSV": 22,
+   "glTF 3D model": 103,
+   "JavaScript": 660,
+   "PHP": 2,
+   "SVG": 83,
+   "CSS": 79,
+   "TypeScript": 655,
+   "Astro": 1,
+   "Batch": 1,
+   "SQL": 1
+  }
+ },
+ "categories": {
+  "untagged": 2977,
+  "claude": 8020,
+  "copilot": 59,
+  "codex": 92
+ },
+ "ai_trailer_share": 0.733,
+ "daily": {
+  "2026-01-05": 7,
+  "2026-01-06": 1,
+  "2026-01-07": 5,
+  "2026-01-09": 1,
+  "2026-01-12": 3,
+  "2026-01-13": 6,
+  "2026-01-14": 10,
+  "2026-01-15": 6,
+  "2026-01-16": 1,
+  "2026-01-19": 1,
+  "2026-01-20": 10,
+  "2026-01-21": 17,
+  "2026-01-22": 5,
+  "2026-01-23": 9,
+  "2026-01-26": 9,
+  "2026-01-27": 6,
+  "2026-01-28": 12,
+  "2026-01-29": 1,
+  "2026-01-30": 13,
+  "2026-02-01": 1,
+  "2026-02-02": 3,
+  "2026-02-03": 1,
+  "2026-02-04": 15,
+  "2026-02-05": 4,
+  "2026-02-06": 5,
+  "2026-02-08": 1,
+  "2026-02-09": 2,
+  "2026-02-11": 11,
+  "2026-02-12": 2,
+  "2026-02-13": 28,
+  "2026-02-14": 2,
+  "2026-02-16": 3,
+  "2026-02-17": 14,
+  "2026-02-18": 10,
+  "2026-02-19": 2,
+  "2026-02-20": 7,
+  "2026-02-23": 1,
+  "2026-02-24": 10,
+  "2026-02-25": 18,
+  "2026-02-26": 12,
+  "2026-02-27": 5,
+  "2026-02-28": 1,
+  "2026-03-01": 4,
+  "2026-03-02": 27,
+  "2026-03-03": 6,
+  "2026-03-04": 3,
+  "2026-03-05": 2,
+  "2026-03-06": 2,
+  "2026-03-11": 4,
+  "2026-03-12": 8,
+  "2026-03-13": 6,
+  "2026-03-16": 1,
+  "2026-03-17": 2,
+  "2026-03-18": 6,
+  "2026-03-20": 1,
+  "2026-03-24": 2,
+  "2026-03-25": 2,
+  "2026-03-26": 4,
+  "2026-03-27": 10,
+  "2026-03-31": 1,
+  "2026-04-07": 1,
+  "2026-04-10": 1,
+  "2026-05-14": 8,
+  "2026-05-20": 1,
+  "2026-06-08": 10,
+  "2026-06-09": 10,
+  "2026-06-10": 8,
+  "2026-06-11": 17,
+  "2026-06-12": 3,
+  "2026-06-13": 28,
+  "2026-06-14": 31,
+  "2026-06-15": 49,
+  "2026-06-16": 12,
+  "2026-06-17": 4,
+  "2026-06-18": 13,
+  "2026-06-19": 2,
+  "2026-06-20": 8,
+  "2026-06-21": 20,
+  "2026-06-22": 9,
+  "2026-06-23": 4,
+  "2026-06-24": 19,
+  "2026-06-25": 15,
+  "2026-06-26": 1,
+  "2026-06-28": 9,
+  "2026-06-29": 8,
+  "2026-06-30": 6,
+  "2026-07-01": 25,
+  "2026-07-02": 24,
+  "2026-07-03": 6,
+  "2026-07-04": 32,
+  "2026-07-05": 38,
+  "2026-07-06": 18,
+  "2026-07-07": 47,
+  "2026-07-08": 54,
+  "2026-07-09": 68,
+  "2026-07-10": 70,
+  "2026-07-11": 26,
+  "2026-07-12": 50,
+  "2026-07-13": 39,
+  "2026-07-14": 49,
+  "2026-07-15": 65,
+  "2026-07-16": 56,
+  "2026-07-17": 61,
+  "2026-07-18": 144,
+  "2026-07-19": 42,
+  "2026-07-20": 23,
+  "2026-07-21": 69,
+  "2026-07-22": 65,
+  "2026-07-23": 88,
+  "2026-07-24": 8,
+  "2026-07-25": 7,
+  "2026-07-26": 26,
+  "2026-07-27": 22,
+  "2026-07-28": 24,
+  "2026-07-29": 19,
+  "2026-07-30": 15,
+  "2026-07-31": 17,
+  "2026-08-01": 1,
+  "2026-08-02": 59,
+  "2026-08-03": 41,
+  "2026-08-04": 95,
+  "2026-08-05": 73,
+  "2026-08-06": 54,
+  "2026-08-07": 67,
+  "2026-08-08": 44,
+  "2026-08-09": 58,
+  "2026-08-10": 48,
+  "2026-08-11": 70,
+  "2026-08-12": 79,
+  "2026-08-13": 76,
+  "2026-08-14": 88,
+  "2026-08-15": 37,
+  "2026-08-16": 51,
+  "2026-08-17": 33,
+  "2026-08-18": 39,
+  "2026-08-19": 140,
+  "2026-08-20": 66,
+  "2026-08-21": 108,
+  "2026-08-22": 103,
+  "2026-08-23": 69,
+  "2026-08-24": 49,
+  "2026-08-25": 69,
+  "2026-08-26": 48,
+  "2026-08-27": 62,
+  "2026-08-28": 81,
+  "2026-08-29": 27,
+  "2026-08-30": 22,
+  "2026-08-31": 41,
+  "2026-09-01": 51,
+  "2026-09-02": 34,
+  "2026-09-03": 46,
+  "2026-09-04": 19,
+  "2026-09-05": 134,
+  "2026-09-06": 35,
+  "2026-09-07": 38,
+  "2026-09-08": 39,
+  "2026-09-09": 28,
+  "2026-09-10": 31,
+  "2026-09-11": 25,
+  "2026-09-12": 18,
+  "2026-09-13": 18,
+  "2026-09-14": 41,
+  "2026-09-15": 26,
+  "2026-09-16": 26,
+  "2026-09-17": 49,
+  "2026-09-18": 25,
+  "2026-09-19": 34,
+  "2026-09-20": 66,
+  "2026-09-21": 53,
+  "2026-09-22": 152,
+  "2026-09-23": 109,
+  "2026-09-24": 47,
+  "2026-09-25": 43,
+  "2026-09-26": 102,
+  "2026-09-27": 144,
+  "2026-09-28": 207,
+  "2026-09-29": 114,
+  "2026-09-30": 114,
+  "2026-10-01": 49,
+  "2026-10-02": 97,
+  "2026-10-03": 37,
+  "2026-10-04": 58,
+  "2026-10-05": 87,
+  "2026-10-06": 174,
+  "2026-10-07": 183,
+  "2026-10-08": 204,
+  "2026-10-09": 129,
+  "2026-10-10": 91,
+  "2026-10-11": 82,
+  "2026-10-12": 40,
+  "2026-10-13": 87,
+  "2026-10-14": 106,
+  "2026-10-15": 67,
+  "2026-10-16": 147,
+  "2026-10-17": 105,
+  "2026-10-18": 113,
+  "2026-10-19": 68,
+  "2026-10-20": 85,
+  "2026-10-21": 81,
+  "2026-10-22": 87,
+  "2026-10-23": 111,
+  "2026-10-24": 52,
+  "2026-10-25": 39,
+  "2026-10-26": 56,
+  "2026-10-27": 69,
+  "2026-10-28": 67,
+  "2026-10-29": 48,
+  "2026-10-30": 130,
+  "2026-10-31": 102,
+  "2026-11-01": 196,
+  "2026-11-02": 124,
+  "2026-11-03": 69,
+  "2026-11-04": 59,
+  "2026-11-05": 32,
+  "2026-11-06": 55,
+  "2026-11-07": 47,
+  "2026-11-08": 211,
+  "2026-11-09": 306,
+  "2026-11-10": 440,
+  "2026-11-11": 117,
+  "2026-11-12": 46,
+  "2026-11-13": 236,
+  "2026-11-14": 70,
+  "2026-11-15": 59,
+  "2026-11-16": 34,
+  "2026-11-17": 28,
+  "2026-11-18": 89,
+  "2026-11-19": 120,
+  "2026-11-20": 69,
+  "2026-11-21": 89,
+  "2026-11-22": 69
+ },
+ "monthly": {
+  "2026-01": 123,
+  "2026-02": 158,
+  "2026-03": 91,
+  "2026-04": 2,
+  "2026-05": 9,
+  "2026-06": 286,
+  "2026-07": 1297,
+  "2026-08": 1898,
+  "2026-09": 1868,
+  "2026-10": 2851,
+  "2026-11": 2565
+ },
+ "by_year": {
+  "2013": 58,
+  "2014": 2,
+  "2015": 6,
+  "2016": 85,
+  "2017": 1,
+  "2018": 6,
+  "2019": 12,
+  "2020": 32,
+  "2021": 17,
+  "2022": 35,
+  "2023": 134,
+  "2024": 825,
+  "2025": 1246,
+  "2026": 11148
+ },
+ "weekly_models": {
+  "2026-01-12": {
+   "Sonnet 4.x": 14
+  },
+  "2026-01-19": {
+   "Opus 4.x": 1,
+   "Sonnet 4.x": 1
+  },
+  "2026-01-26": {
+   "Opus 4.x": 13
+  },
+  "2026-02-02": {
+   "Opus 4.x": 16
+  },
+  "2026-02-09": {
+   "Opus 4.x": 20
+  },
+  "2026-02-16": {
+   "Sonnet 4.x": 2,
+   "Opus 4.x": 9
+  },
+  "2026-02-23": {
+   "Opus 4.x": 16,
+   "Sonnet 4.x": 5
+  },
+  "2026-03-02": {
+   "Sonnet 4.x": 1,
+   "Opus 4.x": 7
+  },
+  "2026-03-09": {
+   "Opus 4.x": 7
+  },
+  "2026-03-16": {
+   "Opus 4.x": 1
+  },
+  "2026-03-23": {
+   "Opus 4.x": 11
+  },
+  "2026-03-30": {
+   "Opus 4.x": 1
+  },
+  "2026-04-06": {
+   "Opus 4.x": 2
+  },
+  "2026-05-11": {
+   "Opus 4.x": 2
+  },
+  "2026-06-08": {
+   "Opus 4.x": 49,
+   "Fable 5": 14,
+   "Sonnet 4.x": 5
+  },
+  "2026-06-15": {
+   "Opus 4.x": 68,
+   "Fable 5": 2
+  },
+  "2026-06-22": {
+   "Sonnet 4.x": 4,
+   "Opus 4.x": 8,
+   "Fable 5": 1
+  },
+  "2026-06-29": {
+   "Opus 4.x": 6,
+   "Sonnet 4.x": 3,
+   "Fable 5": 16,
+   "Sonnet 5": 8,
+   "Haiku 4.x": 3
+  },
+  "2026-07-06": {
+   "Sonnet 5": 33,
+   "Fable 5": 78,
+   "Opus 4.x": 45,
+   "Haiku 4.x": 3
+  },
+  "2026-07-13": {
+   "Opus 4.x": 132,
+   "Fable 5": 46,
+   "Sonnet 5": 7
+  },
+  "2026-07-20": {
+   "Opus 4.x": 167,
+   "Sonnet 5": 17,
+   "Opus 5": 17,
+   "Fable 5": 30,
+   "Haiku 4.x": 2
+  },
+  "2026-07-27": {
+   "Sonnet 5": 2,
+   "Opus 5": 82,
+   "Haiku 4.x": 1
+  },
+  "2026-08-03": {
+   "Opus 5": 171,
+   "Sonnet 5": 64,
+   "Fable 5": 3,
+   "Haiku 4.x": 6
+  },
+  "2026-08-10": {
+   "Sonnet 5": 105,
+   "Opus 5": 142,
+   "Fable 5": 20,
+   "Haiku 4.x": 4
+  },
+  "2026-08-17": {
+   "Sonnet 5": 92,
+   "Opus 5": 267,
+   "Fable 5": 28,
+   "Opus 4.x": 2
+  },
+  "2026-08-24": {
+   "Opus 5": 178,
+   "Sonnet 5": 71
+  },
+  "2026-08-31": {
+   "Fable 5.1": 45,
+   "Opus 5": 139,
+   "Sonnet 5": 59
+  },
+  "2026-09-07": {
+   "Opus 5": 95,
+   "Sonnet 5": 36,
+   "Fable 5.1": 1,
+   "Opus 4.x": 2
+  },
+  "2026-09-14": {
+   "Opus 5": 126,
+   "Sonnet 5": 58,
+   "Fable 5.1": 1,
+   "Opus 4.x": 34
+  },
+  "2026-09-21": {
+   "Opus 5.5": 437,
+   "Opus 5": 63,
+   "Sonnet 5": 56,
+   "Fable 5.1": 1,
+   "Opus 4.x": 4
+  },
+  "2026-09-28": {
+   "Sonnet 5.5": 161,
+   "Sonnet 5": 18,
+   "Opus 5.5": 372
+  },
+  "2026-10-05": {
+   "Opus 5.5": 215,
+   "Sonnet 5.5": 593,
+   "Haiku 5.5": 14,
+   "Fable 5.1": 1,
+   "Sonnet 5": 1
+  },
+  "2026-10-12": {
+   "Sonnet 5.5": 477,
+   "Opus 5.5": 57,
+   "Haiku 5.5": 26
+  },
+  "2026-10-19": {
+   "Opus 5.5": 82,
+   "Sonnet 5.5": 337,
+   "Haiku 5.5": 17,
+   "Sonnet 5": 3
+  },
+  "2026-10-26": {
+   "Sonnet 5.5": 291,
+   "Opus 5.5": 281,
+   "Haiku 5.5": 1
+  },
+  "2026-11-02": {
+   "Opus 5.5": 109,
+   "Sonnet 5.5": 353,
+   "Haiku 5.5": 3
+  },
+  "2026-11-09": {
+   "Opus 5.5": 154,
+   "Sonnet 5.5": 479,
+   "Haiku 5.5": 2,
+   "Fable 5.2": 212
+  },
+  "2026-11-16": {
+   "Opus 5.5": 194,
+   "Sonnet 5.5": 188,
+   "Fable 5.2": 15,
+   "Haiku 5.5": 1
+  }
+ },
+ "model_totals": {
+  "Sonnet 5.5": 2879,
+  "Opus 5.5": 1901,
+  "Opus 5": 1280,
+  "Sonnet 5": 630,
+  "Opus 4.x": 623,
+  "Fable 5": 238,
+  "Fable 5.2": 227,
+  "Haiku 5.5": 64,
+  "Fable 5.1": 49,
+  "Sonnet 4.x": 35,
+  "Haiku 4.x": 19
+ },
+ "hour_dow": [
+  [
+   29,
+   27,
+   40,
+   79,
+   72,
+   97,
+   30,
+   72,
+   86,
+   129,
+   45,
+   30,
+   35,
+   72,
+   112,
+   106,
+   83,
+   51,
+   21,
+   26,
+   38,
+   64,
+   68,
+   89
+  ],
+  [
+   48,
+   36,
+   86,
+   113,
+   37,
+   56,
+   74,
+   55,
+   71,
+   84,
+   97,
+   61,
+   72,
+   66,
+   93,
+   96,
+   120,
+   87,
+   102,
+   68,
+   73,
+   51,
+   90,
+   152
+  ],
+  [
+   75,
+   34,
+   79,
+   65,
+   37,
+   32,
+   52,
+   65,
+   80,
+   133,
+   100,
+   145,
+   116,
+   110,
+   82,
+   52,
+   86,
+   67,
+   41,
+   33,
+   53,
+   34,
+   64,
+   91
+  ],
+  [
+   67,
+   62,
+   58,
+   72,
+   38,
+   33,
+   35,
+   63,
+   56,
+   79,
+   84,
+   52,
+   97,
+   47,
+   72,
+   103,
+   69,
+   41,
+   13,
+   29,
+   40,
+   38,
+   98,
+   88
+  ],
+  [
+   60,
+   38,
+   62,
+   90,
+   39,
+   42,
+   37,
+   31,
+   82,
+   105,
+   64,
+   108,
+   135,
+   116,
+   102,
+   97,
+   105,
+   54,
+   65,
+   58,
+   41,
+   33,
+   70,
+   53
+  ],
+  [
+   85,
+   55,
+   57,
+   76,
+   16,
+   16,
+   53,
+   125,
+   45,
+   96,
+   37,
+   44,
+   22,
+   24,
+   64,
+   39,
+   16,
+   34,
+   54,
+   53,
+   35,
+   71,
+   46,
+   178
+  ],
+  [
+   163,
+   126,
+   78,
+   68,
+   55,
+   84,
+   80,
+   66,
+   62,
+   52,
+   61,
+   52,
+   61,
+   53,
+   35,
+   22,
+   40,
+   42,
+   14,
+   148,
+   30,
+   51,
+   89,
+   39
+  ]
+ ],
+ "half_hours": [
+  329,
+  198,
+  268,
+  110,
+  144,
+  316,
+  392,
+  171,
+  101,
+  193,
+  250,
+  110,
+  182,
+  179,
+  261,
+  216,
+  195,
+  287,
+  349,
+  329,
+  279,
+  209,
+  251,
+  241,
+  267,
+  271,
+  235,
+  253,
+  284,
+  276,
+  261,
+  254,
+  282,
+  237,
+  202,
+  174,
+  148,
+  162,
+  196,
+  219,
+  166,
+  144,
+  141,
+  201,
+  258,
+  267,
+  349,
+  341
+ ],
+ "workday": {
+  "start": "08:30",
+  "end": "17:00"
+ },
+ "offhours_commits": 6583,
+ "night_commits": 2582,
+ "weekend_commits": 2912,
+ "busiest_day": {
+  "date": "2026-11-10",
+  "commits": 440
+ },
+ "busiest_hour": {
+  "hour": "2026-11-08 19",
+  "commits": 139
+ },
+ "longest_streak": {
+  "days": 148,
+  "end": "2026-11-22"
+ },
+ "first_10_commit_day": "2026-01-14",
+ "worktree_agent_merges": 34,
+ "top_repos": [
+  {
+   "name": "Concordia space city sim",
+   "commits": 2171,
+   "language": "TypeScript",
+   "masked": false
+  },
+  {
+   "name": "freecapitalists.org",
+   "commits": 1704,
+   "language": "Python",
+   "masked": false
+  },
+  {
+   "name": "",
+   "commits": 1007,
+   "language": "TypeScript",
+   "masked": true
+  },
+  {
+   "name": "",
+   "commits": 799,
+   "language": "Python",
+   "masked": true
+  },
+  {
+   "name": "CheatSheets",
+   "commits": 736,
+   "language": "HTML",
+   "masked": false
+  },
+  {
+   "name": "",
+   "commits": 553,
+   "language": "C#",
+   "masked": true
+  },
+  {
+   "name": "walletrecovery.info",
+   "commits": 464,
+   "language": "Nunjucks",
+   "masked": false
+  },
+  {
+   "name": "",
+   "commits": 452,
+   "language": "TypeScript",
+   "masked": true
+  },
+  {
+   "name": "Discourse forum migration",
+   "commits": 366,
+   "language": "Ruby",
+   "masked": false
+  },
+  {
+   "name": "coloradofirearmswatch.org",
+   "commits": 357,
+   "language": "Python",
+   "masked": false
+  },
+  {
+   "name": "whopaysforai.org",
+   "commits": 288,
+   "language": "TypeScript",
+   "masked": false
+  },
+  {
+   "name": "davidveksler.com",
+   "commits": 161,
+   "language": "HTML",
+   "masked": false
+  },
+  {
+   "name": "",
+   "commits": 157,
+   "language": "Python",
+   "masked": true
+  },
+  {
+   "name": "Home automation",
+   "commits": 148,
+   "language": "PowerShell",
+   "masked": false
+  },
+  {
+   "name": "Press-request agent",
+   "commits": 136,
+   "language": "Python",
+   "masked": false
+  },
+  {
+   "name": "stats-dashboard",
+   "commits": 113,
+   "language": "JavaScript",
+   "masked": false
+  },
+  {
+   "name": "objectivismonline.com",
+   "commits": 105,
+   "language": "Python",
+   "masked": false
+  },
+  {
+   "name": "Concordia website",
+   "commits": 100,
+   "language": "JavaScript",
+   "masked": false
+  },
+  {
+   "name": "claude-routines (agent fleet)",
+   "commits": 94,
+   "language": "PowerShell",
+   "masked": false
+  },
+  {
+   "name": "Potemkin Pipeline",
+   "commits": 89,
+   "language": "JavaScript",
+   "masked": false
+  },
+  {
+   "name": "Wallet recovery lab",
+   "commits": 87,
+   "language": "Python",
+   "masked": false
+  },
+  {
+   "name": "",
+   "commits": 83,
+   "language": "Python",
+   "masked": true
+  },
+  {
+   "name": "Mises Wiki",
+   "commits": 77,
+   "language": "Python",
+   "masked": false
+  },
+  {
+   "name": "",
+   "commits": 75,
+   "language": "Shell",
+   "masked": true
+  },
+  {
+   "name": "vellum.capital",
+   "commits": 74,
+   "language": "HTML",
+   "masked": false
+  },
+  {
+   "name": "SEO cross-linking",
+   "commits": 70,
+   "language": "Python",
+   "masked": false
+  },
+  {
+   "name": "",
+   "commits": 69,
+   "language": "Python",
+   "masked": true
+  },
+  {
+   "name": "CheatSheets outreach",
+   "commits": 62,
+   "language": "HTML",
+   "masked": false
+  },
+  {
+   "name": "Cloudflare static kit",
+   "commits": 34,
+   "language": "Python",
+   "masked": false
+  },
+  {
+   "name": "MOAR AI router",
+   "commits": 30,
+   "language": "JavaScript",
+   "masked": false
+  },
+  {
+   "name": "server-mirror",
+   "commits": 27,
+   "language": "Shell",
+   "masked": false
+  },
+  {
+   "name": "M87 black hole descent",
+   "commits": 25,
+   "language": "TypeScript",
+   "masked": false
+  },
+  {
+   "name": "Ops dashboard",
+   "commits": 22,
+   "language": "PHP",
+   "masked": false
+  },
+  {
+   "name": "",
+   "commits": 21,
+   "language": "JavaScript",
+   "masked": true
+  },
+  {
+   "name": "",
+   "commits": 19,
+   "language": "C#",
+   "masked": true
+  },
+  {
+   "name": "thebitcoinconsultancy.com",
+   "commits": 19,
+   "language": "Nunjucks",
+   "masked": false
+  },
+  {
+   "name": "Vellum editorial",
+   "commits": 19,
+   "language": "JavaScript",
+   "masked": false
+  },
+  {
+   "name": "",
+   "commits": 18,
+   "language": "Python",
+   "masked": true
+  },
+  {
+   "name": "Facebook poster",
+   "commits": 18,
+   "language": "Python",
+   "masked": false
+  },
+  {
+   "name": "Local AI lab",
+   "commits": 17,
+   "language": "Python",
+   "masked": false
+  }
+ ],
+ "top_verbs": {
+  "Add": 740,
+  "Docs": 482,
+  "Cil": 350,
+  "Fix": 189,
+  "Update": 141,
+  "Refresh": 128,
+  "Chore": 116,
+  "Haro": 116,
+  "Sync": 111,
+  "Record": 106,
+  "Outreach": 100,
+  "Public": 98,
+  "Cold": 85,
+  "Site": 84
+ },
+ "top_words": {
+  "docs": 743,
+  "deploy": 325,
+  "spec": 288,
+  "outreach": 275,
+  "page": 263,
+  "after": 263,
+  "site": 232,
+  "card": 227,
+  "sync": 225,
+  "check": 224,
+  "draft": 220,
+  "refresh": 215,
+  "record": 212,
+  "drafts": 200,
+  "update": 185,
+  "pass": 167,
+  "plan": 163,
+  "first": 159,
+  "cards": 158,
+  "news": 156,
+  "gate": 155,
+  "pages": 152,
+  "public": 149,
+  "links": 147,
+  "data": 146,
+  "state": 138,
+  "review": 138,
+  "agents": 137,
+  "forum": 136,
+  "link": 132,
+  "cloudflare": 128,
+  "item": 128,
+  "repo": 127,
+  "produced": 125,
+  "drop": 123,
+  "rotor": 123,
+  "script": 121,
+  "json": 121,
+  "haro": 120,
+  "post": 116,
+  "chore": 116,
+  "live": 115,
+  "nightly": 115,
+  "launch": 114,
+  "document": 111,
+  "section": 111,
+  "cold": 108,
+  "hero": 105,
+  "every": 103,
+  "weekly": 103,
+  "only": 102,
+  "build": 101,
+  "cover": 101,
+  "network": 100,
+  "wall": 98,
+  "sheet": 97,
+  "health": 97,
+  "runbook": 96,
+  "daily": 96,
+  "thread": 96
+ },
+ "label_min_radius": 30,
+ "number_min_radius": 11,
+ "sessions": {
+  "claude_prompts": 6594,
+  "claude_sessions": 4217,
+  "claude_subagents": 2112,
+  "claude_tool_calls": 303137,
+  "codex_prompts": 0,
+  "codex_sessions": 139,
+  "codex_tool_calls": 296,
+  "first_day": "2026-07-23",
+  "last_day": "2026-11-22"
+ },
+ "tool_rows": [
+  {
+   "label": "Search and read files",
+   "count": 74233,
+   "detail": "grep, sed, cat"
+  },
+  {
+   "label": "Python scripts",
+   "count": 37793,
+   "detail": "python, pip"
+  },
+  {
+   "label": "Read a file",
+   "count": 31935,
+   "detail": ""
+  },
+  {
+   "label": "Git and GitHub",
+   "count": 19997,
+   "detail": "git status, git add, git diff"
+  },
+  {
+   "label": "Call a connected app",
+   "count": 18413,
+   "detail": ""
+  },
+  {
+   "label": "Edit a file",
+   "count": 16262,
+   "detail": ""
+  },
+  {
+   "label": "Drive a browser",
+   "count": 13587,
+   "detail": ""
+  },
+  {
+   "label": "Node and build tools",
+   "count": 11727,
+   "detail": "node, npm, npx"
+  },
+  {
+   "label": "Write a file",
+   "count": 11271,
+   "detail": ""
+  },
+  {
+   "label": "Search the web",
+   "count": 11197,
+   "detail": ""
+  },
+  {
+   "label": "Fetch a web page",
+   "count": 8995,
+   "detail": ""
+  },
+  {
+   "label": "Other shell commands",
+   "count": 7136,
+   "detail": ""
+  }
+ ]
+}

@@ -1,0 +1,14 @@
+<!-- Optional section rendered before the links. Remove profile.playbook from the config to drop it. Element id play-pace gets the 30-day pace rounded down to 10. -->
+<section aria-labelledby="h-play">
+  <div class="cmd"><b>$</b><code>cat ~/AGENTS.md</code></div>
+  <h2 id="h-play">How one person ships <em id="play-pace">100</em> commits a day.</h2>
+  <p class="lede">The volume comes from a small set of rules every agent reads before it touches a repo. They are written down, versioned, and enforced by machines where possible.</p>
+  <ol class="rules">
+    <li><h3>Runbooks are the spec</h3><p>Every repo opens with an AGENTS.md routing table: which doc governs which task. Agents read the smallest path and stop guessing.</p></li>
+    <li><h3>Scripts before tokens</h3><p>Anything done twice becomes a script. Agents orchestrate scripts instead of re-deriving what code can compute, which keeps runs fast and cheap.</p></li>
+    <li><h3>The night shift</h3><p>Recurring judgment work runs as scheduled routines between 1 and 5 AM, each with hard limits, per-run caps and a fail-closed rule.</p></li>
+    <li><h3>Git is the safety net</h3><p>Agents commit and push without asking, in small commits. History is the backup and the audit log. Deployment is the one human approval gate.</p></li>
+    <li><h3>Rules become gates</h3><p>A rule an agent might forget becomes a pre-push hook or a build-failing lint. Machines enforce it every time.</p></li>
+    <li><h3>Right model, right job</h3><p>Haiku for bulk mechanical work, Sonnet for volume, Opus for judgment, Fable for specs that cheaper models then implement.</p></li>
+  </ol>
+</section>
