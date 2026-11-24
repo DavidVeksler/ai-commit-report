@@ -5,7 +5,7 @@
 | Task | Read this |
 | --- | --- |
 | What the tool does, setup, every config field | `README.md` |
-| Refresh David's numbers and publish the demo | `docs/runbook.md` |
+| Update the live demo (one command: `scripts\publish.ps1`) | `docs/runbook.md` § fast path |
 | Change a knob (profile, site head tags, workday, masking, chart rows) | `data/report-config.json` |
 | Rename or reveal a repo in the bubble chart | `data/display-names.json` |
 | Change the playbook section (demo only) | `data/playbook.html` |
@@ -25,4 +25,4 @@
 - Nothing personal is hardcoded in scripts or the template: names, links and head tags come from `profile` and `site` in the config, so anyone can fork and run it.
 - Headline counting rule: commits authored under the owner's identities, any branch, every repo the account owns or belongs to, work org included. Claude worktree agents and cron bots are reported separately.
 - Copy follows David-voice rules: no em dashes in page copy, no unverifiable claims. Every number on the page comes from `data/stats.json`.
-- Publishing to davidveksler.com is a deploy and needs David's go-ahead each time (`docs/runbook.md`).
+- Publishing to davidveksler.com is a deploy and needs David's go-ahead each time (`scripts\publish.ps1`, see `docs/runbook.md`).
